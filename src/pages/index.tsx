@@ -1,15 +1,12 @@
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { SiNextDotJs } from 'react-icons/si';
-import styled from 'styled-components';
 import axios from 'axios';
+import styled from 'styled-components';
+import { SiNextDotJs } from 'react-icons/si';
 
 import { colors } from '../constants/theme';
 import { Container, Heading, Section } from '../components/Utilities';
-import Nav from '../components/NavigationBar';
-import DevCard from '../components/DevCard';
-import Project from '../components/Project';
-import Footer from '../components/Footer';
+import { NavigationBar, DevCard, Project, Footer } from '../components';
 
 export default function Home({ apps, team }: IProps) {
   return (
@@ -17,14 +14,14 @@ export default function Home({ apps, team }: IProps) {
       <Head>
         <title>7 Days 50 Projects</title>
       </Head>
-      <Nav />
+      <NavigationBar />
       <Hero>
         <Heading center>50 Projects in 7 Days </Heading>
         <p>Using</p>
         <LogoContainer>
-          <img src='/typescript.png' style={{ marginRight: '2rem' }} />
+          <img src='/typescript.png' alt='ts' style={{ marginRight: '2rem' }} />
           <SiNextDotJs style={{ marginRight: '2rem' }} />
-          <img src='/styledcomponent.png' />
+          <img src='/styledcomponent.png' alt='styled-components' />
         </LogoContainer>
         <BgImage src='https://raw.githubusercontent.com/benxene/blobs/main/benxene-wo-name.png' />
       </Hero>
@@ -38,7 +35,7 @@ export default function Home({ apps, team }: IProps) {
                   day={num + 1}
                   key={app.file}
                   image={`screenshots/${app.file}.jpg`}
-                  link={`/${app.file}`}
+                  link={app.file !== 'index' ? `/${app.file}` : '/'}
                 >
                   {app.name}
                 </Project>
@@ -81,7 +78,7 @@ interface IProps {
   }>;
 }
 
-export const getServerSideProps: GetServerSideProps = async _ => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const baseUrl =
     process.env.NODE_ENV === 'production'
       ? 'https://7days50projects.vercel.app'
@@ -125,6 +122,10 @@ const Hero = styled.div`
       font-size: 3rem;
     }
   }
+
+  & > * {
+    z-index: 1;
+  }
 `;
 
 const BgImage = styled.img`
@@ -132,6 +133,7 @@ const BgImage = styled.img`
   width: 60rem;
   height: 60rem;
   opacity: 0.2;
+  z-index: 0;
 
   @media (max-width: 700px) {
     width: 40rem;

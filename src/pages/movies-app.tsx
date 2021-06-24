@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { RiSearch2Line } from 'react-icons/ri';
 
-import MovieCard from '../components/MovieCard';
+import { MovieCard } from '../components';
 import { colors } from '../constants/theme';
 import { IconButton } from './netflix-nav';
 import axios from 'axios';
@@ -62,7 +62,7 @@ interface MovieProps {
   poster_path: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async _ => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get(
     'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1'
   );

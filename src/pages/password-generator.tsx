@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useReducer, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { RiFileCopy2Line, RiAddLine, RiSubtractLine } from 'react-icons/ri';
@@ -6,9 +7,8 @@ import { CenterContainer, Heading, Button, Alert } from '../components/Utilities
 import { colors, sizes } from '../constants/theme';
 import { initialOptions, reducer } from '../helpers/passgen-reducer';
 import { generatePassword } from '../functions/password-generator';
-import Head from 'next/head';
 
-export default function passwordGenerator() {
+export default function PasswordGenerator() {
   const [password, setPassword] = useState<string>('');
   const [options, dispatch] = useReducer(reducer, initialOptions);
   const [copied, setCopied] = useState<boolean>(false);
@@ -70,19 +70,35 @@ export default function passwordGenerator() {
           </InputArea>
           <InputArea>
             <p>Allow Capital letters?</p>
-            <Input type='checkbox' onChange={() => dispatch('allowCaps')} checked={options.allowCaps} />
+            <Input
+              type='checkbox'
+              onChange={() => dispatch('allowCaps')}
+              checked={options.allowCaps}
+            />
           </InputArea>
           <InputArea>
             <p>Allow small letters?</p>
-            <Input type='checkbox' onChange={() => dispatch('allowSmall')} checked={options.allowSmall} />
+            <Input
+              type='checkbox'
+              onChange={() => dispatch('allowSmall')}
+              checked={options.allowSmall}
+            />
           </InputArea>
           <InputArea>
             <p>Allow numbers?</p>
-            <Input type='checkbox' onChange={() => dispatch('allowNumbers')} checked={options.allowNumbers} />
+            <Input
+              type='checkbox'
+              onChange={() => dispatch('allowNumbers')}
+              checked={options.allowNumbers}
+            />
           </InputArea>
           <InputArea>
             <p>Allow special characters?</p>
-            <Input type='checkbox' onChange={() => dispatch('allowSpecial')} checked={options.allowSpecial} />
+            <Input
+              type='checkbox'
+              onChange={() => dispatch('allowSpecial')}
+              checked={options.allowSpecial}
+            />
           </InputArea>
           <Button color='secondary' onClick={handleSubmit}>
             Generate
@@ -96,14 +112,6 @@ export default function passwordGenerator() {
       </CenterContainer>
     </>
   );
-}
-
-interface IOptions {
-  noOfChars: number;
-  allowCaps: boolean;
-  allowSmall: boolean;
-  allowNumbers: boolean;
-  allowSpecial: boolean;
 }
 
 const Frame = styled.div`

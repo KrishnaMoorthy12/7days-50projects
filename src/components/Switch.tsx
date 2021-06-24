@@ -5,7 +5,13 @@ import { colors } from '../constants/theme';
 export default function Switch({ checked, onChange, id, ...props }: IProps) {
   return (
     <>
-      <Check id={id || 'theCheck'} type='checkbox' checked={checked} onChange={onChange} {...props} />
+      <Check
+        id={id || 'theCheck'}
+        type='checkbox'
+        checked={checked}
+        onChange={onChange}
+        {...props}
+      />
       <Label htmlFor={id || 'theCheck'} />
     </>
   );
@@ -14,6 +20,7 @@ export default function Switch({ checked, onChange, id, ...props }: IProps) {
 interface IProps {
   checked: boolean;
   id?: string;
+  // eslint-disable-next-line no-unused-vars
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   props?: any;
 }

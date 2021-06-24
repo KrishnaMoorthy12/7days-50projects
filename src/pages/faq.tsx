@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 
+import { ExpansionPanel } from '../components';
 import { colors } from '../constants/theme';
-
-import ExpansionPanel from '../components/ExpansionPanel';
 
 const content = [
   {
@@ -38,7 +37,9 @@ export default function FAQ() {
         <Main>
           <h1>Frequently Asked Questions</h1>
           {content.map((val, ind: number) => {
-            return <ExpansionPanel key={ind} ind={ind} question={val.question} answer={val.answer} />;
+            return (
+              <ExpansionPanel key={ind} ind={ind} question={val.question} answer={val.answer} />
+            );
           })}
         </Main>
       </Section>
